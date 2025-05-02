@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class PantallaSeis extends StatelessWidget {
+class PantallaSeis extends StatefulWidget {
   const PantallaSeis({Key? key}) : super(key: key);
 
+  @override
+  State<PantallaSeis> createState() => _PantallaSeisState();
+}
+
+class _PantallaSeisState extends State<PantallaSeis> {
+  double _size = 300;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +17,7 @@ class PantallaSeis extends StatelessWidget {
         title: const Center(
           // Centra el texto
           child: Text(
-            'Pantalla 6',
+            'Pantalla 6 Dominguez',
             style: TextStyle(
               color: Colors.black, // Letra blanca
               fontSize: 20.0, // Tamaño de la letra 20
@@ -24,6 +30,21 @@ class PantallaSeis extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _size = _size == 300 ? 100 : 300;
+              });
+            },
+            child: Container(
+              color: Colors.white,
+              child: AnimatedSize(
+                curve: Curves.easeIn,
+                duration: const Duration(seconds: 1),
+                child: FlutterLogo(size: _size),
+              ),
+            ),
+          )
         ],
       ),
     );

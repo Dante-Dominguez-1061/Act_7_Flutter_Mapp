@@ -17,7 +17,7 @@ class _PantallaCincoState extends State<PantallaCinco> {
         title: const Center(
           // Centra el texto
           child: Text(
-            'Pantalla 2',
+            'Pantalla 5 Dominguez',
             style: TextStyle(
               color: Colors.black, // Letra blanca
               fontSize: 20.0, // Tamaño de la letra 20
@@ -30,24 +30,32 @@ class _PantallaCincoState extends State<PantallaCinco> {
           SizedBox(
             height: 10,
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                selected = !selected;
-              });
-            },
-            child: Center(
-              child: AnimatedContainer(
-                width: selected ? 200.0 : 100.0,
-                height: selected ? 100.0 : 200.0,
-                color: selected ? Colors.blueGrey : Colors.white,
-                alignment: selected
-                    ? Alignment.center
-                    : AlignmentDirectional.topCenter,
-                duration: const Duration(seconds: 2),
-                curve: Curves.fastOutSlowIn,
-                child: const FlutterLogo(size: 75),
-              ),
+          SizedBox(
+            width: 200,
+            height: 350,
+            child: Stack(
+              children: <Widget>[
+                AnimatedPositioned(
+                  width: selected ? 200.0 : 50.0,
+                  height: selected ? 50.0 : 200.0,
+                  top: selected ? 50.0 : 150.0,
+                  duration: const Duration(seconds: 2),
+                  curve: Curves.fastOutSlowIn,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selected = !selected;
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.orangeAccent,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(

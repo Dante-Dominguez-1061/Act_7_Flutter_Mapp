@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
 
-class PantallaDos extends StatelessWidget {
+class PantallaDos extends StatefulWidget {
   const PantallaDos({Key? key}) : super(key: key);
 
   @override
+  State<PantallaDos> createState() => _PantallaDosState();
+}
+
+class _PantallaDosState extends State<PantallaDos>
+    with TickerProviderStateMixin {
+  bool _isPlay = false;
+  late AnimationController _controller;
+  @override
+  void initState() {
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -11,7 +33,7 @@ class PantallaDos extends StatelessWidget {
         title: const Center(
           // Centra el texto
           child: Text(
-            'Pantalla 2',
+            'Pantalla 2 Dominguez',
             style: TextStyle(
               color: Colors.black, // Letra blanca
               fontSize: 20.0, // Tamaño de la letra 20
@@ -25,28 +47,23 @@ class PantallaDos extends StatelessWidget {
             height: 10,
           ),
           Center(
-            child: AboutListTile(
-              icon: Icon(Icons.info),
-              applicationIcon: FlutterLogo(),
-              applicationLegalese: 'Legalese',
-              applicationName: 'Flutter App',
-              applicationVersion: 'version 1.0.0',
-              aboutBoxChildren: [
-                Text('This is a text created by Flutter Mapp'),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
+            child: GestureDetector(
+              onTap: () {
+                if (_isPlay == false) {
+                  _controller.forward();
+                  _isPlay = true;
+                } else {
+                  _controller.reverse();
+                  _isPlay = false;
+                }
               },
-              child: const Text('Pantalla Inicial!'),
+              child: AnimatedIcon(
+                icon: AnimatedIcons.play_pause,
+                progress: _controller,
+                size: 100,
+              ),
             ),
-          ),
+          )
         ],
       ),
     );

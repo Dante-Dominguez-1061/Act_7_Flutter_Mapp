@@ -8,7 +8,7 @@ class PantallaCuatro extends StatefulWidget {
 }
 
 class _PantallaCuatroState extends State<PantallaCuatro> {
-  bool selected = false;
+  double padValue = 0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _PantallaCuatroState extends State<PantallaCuatro> {
         title: const Center(
           // Centra el texto
           child: Text(
-            'Pantalla 2',
+            'Pantalla 4 Dominguez',
             style: TextStyle(
               color: Colors.black, // Letra blanca
               fontSize: 20.0, // Tamaño de la letra 20
@@ -30,26 +30,32 @@ class _PantallaCuatroState extends State<PantallaCuatro> {
           SizedBox(
             height: 10,
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                selected = !selected;
-              });
-            },
-            child: Center(
-              child: Container(
-                width: double.infinity,
-                height: 250.0,
-                color: Colors.blueGrey,
-                child: AnimatedAlign(
-                  alignment:
-                      selected ? Alignment.topRight : Alignment.bottomLeft,
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.fastOutSlowIn,
-                  child: const FlutterLogo(size: 50.0),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orangeAccent,
                 ),
+                child: const Text('Change padding'),
+                onPressed: () {
+                  setState(() {
+                    padValue = padValue == 0.0 ? 100.0 : 0.0;
+                  });
+                },
               ),
-            ),
+              Text('Padding = $padValue'),
+              AnimatedPadding(
+                padding: EdgeInsets.all(padValue),
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeInOut,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 4,
+                  color: Colors.orangeAccent,
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
