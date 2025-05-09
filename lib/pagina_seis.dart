@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 
-class PantallaSeis extends StatefulWidget {
+class PantallaSeis extends StatelessWidget {
   const PantallaSeis({Key? key}) : super(key: key);
 
-  @override
-  State<PantallaSeis> createState() => _PantallaSeisState();
-}
-
-class _PantallaSeisState extends State<PantallaSeis> {
-  double _size = 300;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,20 +24,13 @@ class _PantallaSeisState extends State<PantallaSeis> {
           SizedBox(
             height: 10,
           ),
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                _size = _size == 300 ? 100 : 300;
-              });
-            },
-            child: Container(
-              color: Colors.white,
-              child: AnimatedSize(
-                curve: Curves.easeIn,
-                duration: const Duration(seconds: 1),
-                child: FlutterLogo(size: _size),
-              ),
-            ),
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            color: Colors.orangeAccent,
+            alignment: Alignment.center,
+            child: const Text('Flutter Mapp'),
+            constraints: const BoxConstraints.expand(height: 200),
+            transform: Matrix4.rotationZ(0.2),
           )
         ],
       ),

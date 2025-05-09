@@ -7,25 +7,12 @@ class PantallaDos extends StatefulWidget {
   State<PantallaDos> createState() => _PantallaDosState();
 }
 
-class _PantallaDosState extends State<PantallaDos>
-    with TickerProviderStateMixin {
-  bool _isPlay = false;
-  late AnimationController _controller;
-  @override
-  void initState() {
-    _controller = AnimationController(
-      duration: const Duration(seconds: 1),
-      vsync: this,
-    );
-    super.initState();
-  }
+class _PantallaDosState extends State<PantallaDos> {
+  bool _first = true;
+  double _fontSize = 60;
+  Color _color = Colors.blue;
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -46,23 +33,34 @@ class _PantallaDosState extends State<PantallaDos>
           SizedBox(
             height: 10,
           ),
-          Center(
-            child: GestureDetector(
-              onTap: () {
-                if (_isPlay == false) {
-                  _controller.forward();
-                  _isPlay = true;
-                } else {
-                  _controller.reverse();
-                  _isPlay = false;
-                }
-              },
-              child: AnimatedIcon(
-                icon: AnimatedIcons.play_pause,
-                progress: _controller,
-                size: 100,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              SizedBox(
+                height: 120,
+                child: AnimatedDefaultTextStyle(
+                  duration: const Duration(milliseconds: 300),
+                  style: TextStyle(
+                    fontSize: _fontSize,
+                    color: _color,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  child: const Text('Flutter'),
+                ),
               ),
-            ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _fontSize = _first ? 90 : 60;
+                    _color = _first ? Colors.blue : Colors.red;
+                    _first = !_first;
+                  });
+                },
+                child: const Text(
+                  "Switch",
+                ),
+              )
+            ],
           )
         ],
       ),
